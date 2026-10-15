@@ -1,9 +1,17 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api/v1';
+// Support VITE_API_URL for production deployment while preserving '/api/v1' fallback for local Vite dev proxy
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl) {
+    const cleanUrl = envUrl.replace(/\/+$/, '');
+    return cleanUrl.endsWith('/api/v1') ? cleanUrl : `${cleanUrl}/api/v1`;
+  }
+  return '/api/v1';
+};
 
 export const api = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: getBaseUrl(),
   headers: {
     'Content-Type': 'application/json',
   },

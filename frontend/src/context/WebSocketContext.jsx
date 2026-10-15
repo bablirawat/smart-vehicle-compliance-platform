@@ -14,9 +14,25 @@ export const WebSocketProvider = ({ children }) => {
     if (!selectedSiteId) return;
 
     const connect = () => {
-      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-      const host = window.location.host;
-      const wsUrl = `${protocol}//${host}/ws/sites/${selectedSiteId}`;
+      let wsUrl;
+      const rawWs = import.meta.env.VITE_WS_URL || import.meta.env.VITE_API_URL;
+      if (rawWs) {
+        let cleanBase = rawWs.replace(/\/+$/, '');
+        // Strip trailing path segments if full URL (/api/v1, /api, /ws) was provided
+        cleanBase = cleanBase.replace(/\/api(\/v1)?$/, '').replace(/\/ws$/, '');
+        if (cleanBase.startsWith('http://')) {
+          cleanBase = cleanBase.replace(/^http:\/\//, 'ws://');
+        } else if (cleanBase.startsWith('https://')) {
+          cleanBase = cleanBase.replace(/^https:\/\//, 'wss://');
+        } else if (!cleanBase.startsWith('ws://') && !cleanBase.startsWith('wss://')) {
+          cleanBase = `wss://${cleanBase}`;
+        }
+        wsUrl = `${cleanBase}/ws/sites/${selectedSiteId}`;
+      } else {
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const host = window.location.host;
+        wsUrl = `${protocol}//${host}/ws/sites/${selectedSiteId}`;
+      }
 
       console.log(`Connecting WebSocket to: ${wsUrl}`);
       const ws = new WebSocket(wsUrl);
