@@ -10,7 +10,7 @@ export const Timeline = ({ events }) => {
       {events.map((evt, idx) => (
         <div key={evt.id || idx} className="timeline-item">
           <div className="timeline-marker" />
-          <div className="timeline-content">
+          <div className="timeline-content min-w-0 break-words">
             <div className="flex-between">
               <span className="font-semibold text-sm text-slate-200 uppercase">
                 {evt.new_state ? evt.new_state.replace(/_/g, ' ') : evt.event_source}

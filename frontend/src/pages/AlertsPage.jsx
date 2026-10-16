@@ -56,19 +56,19 @@ export const AlertsPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <Bell className="w-6 h-6 text-rose-400" />
-            <span>Alerts & Incident Management Center</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-rose-400 shrink-0" />
+            <span className="truncate">Alerts & Incident Management Center</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Real-time Exception Tracking, Operational Warnings & Operator Resolution</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="form-select text-xs py-1.5"
+            className="form-select text-xs py-1.5 flex-1 sm:flex-none min-w-[120px]"
           >
             <option value="">All Statuses</option>
             <option value="OPEN">OPEN</option>
@@ -79,7 +79,7 @@ export const AlertsPage = () => {
           <select
             value={severityFilter}
             onChange={(e) => setSeverityFilter(e.target.value)}
-            className="form-select text-xs py-1.5"
+            className="form-select text-xs py-1.5 flex-1 sm:flex-none min-w-[120px]"
           >
             <option value="">All Severities</option>
             <option value="CRITICAL">CRITICAL</option>
@@ -88,7 +88,7 @@ export const AlertsPage = () => {
             <option value="LOW">LOW</option>
           </select>
 
-          <button onClick={fetchAlerts} className="btn btn-secondary btn-sm">
+          <button onClick={fetchAlerts} className="btn-action btn-secondary-style btn-sm-size" title="Refresh">
             <RefreshCw className="w-4 h-4" />
           </button>
         </div>
@@ -137,11 +137,11 @@ export const AlertsPage = () => {
                       <StatusBadge status={alert.status} />
                     </td>
                     <td>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 whitespace-nowrap">
                         {alert.status === 'OPEN' && (
                           <button
                             onClick={() => handleAcknowledge(alert.id)}
-                            className="btn btn-secondary btn-sm text-xs"
+                            className="btn-action btn-secondary-style btn-sm-size text-xs"
                           >
                             Acknowledge
                           </button>
@@ -149,7 +149,7 @@ export const AlertsPage = () => {
                         {alert.status !== 'RESOLVED' && (
                           <button
                             onClick={() => handleResolve(alert.id)}
-                            className="btn btn-success btn-sm text-xs"
+                            className="btn-action btn-success-style btn-sm-size text-xs"
                           >
                             Resolve
                           </button>

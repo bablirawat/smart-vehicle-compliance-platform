@@ -12,11 +12,11 @@ export const UserManagementPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <Users className="w-6 h-6 text-purple-400" />
-            <span>RBAC User & Role Management</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Users className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400 shrink-0" />
+            <span className="truncate">RBAC User & Role Management</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Role-Based Access Control Credentials & Station Scope</p>
         </div>

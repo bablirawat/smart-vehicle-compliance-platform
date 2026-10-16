@@ -20,7 +20,7 @@ export const StatusBadge = ({ status }) => {
   }
 
   return (
-    <span className={`badge ${style}`}>
+    <span className={`badge ${style} whitespace-nowrap`}>
       {s.replace(/_/g, ' ')}
     </span>
   );

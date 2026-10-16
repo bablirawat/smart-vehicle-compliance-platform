@@ -39,15 +39,15 @@ export const CentralCommandDashboard = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <Globe className="w-6 h-6 text-indigo-400" />
-            <span>Central Command Dashboard</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 shrink-0" />
+            <span className="truncate">Central Command Dashboard</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Multi-Site Network Compliance Monitoring & Resource Aggregation</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           <select
             value={timeframe}
             onChange={(e) => setTimeframe(e.target.value)}
@@ -57,7 +57,7 @@ export const CentralCommandDashboard = () => {
             <option value="LAST 24 HOURS">Last 24 Hours</option>
             <option value="LAST 7 DAYS">Last 7 Days</option>
           </select>
-          <button onClick={loadCentralData} className="btn btn-secondary btn-sm">
+          <button onClick={loadCentralData} className="btn-action btn-secondary-style btn-sm-size" title="Refresh">
             <RefreshCw className="w-4 h-4" />
           </button>
         </div>
@@ -82,7 +82,7 @@ export const CentralCommandDashboard = () => {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.site_summaries.map((site) => (
             <div
               key={site.site_id}

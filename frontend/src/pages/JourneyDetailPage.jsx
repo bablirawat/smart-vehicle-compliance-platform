@@ -75,22 +75,22 @@ export const JourneyDetailPage = () => {
 
       {/* Header Info */}
       <div className="panel-card">
-        <div className="flex-between">
-          <div className="flex items-center gap-4">
-            <div className="bg-blue-600/20 p-3 rounded-xl border border-blue-500/30 text-blue-400">
-              <Truck className="w-8 h-8" />
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="bg-blue-600/20 p-2.5 sm:p-3 rounded-xl border border-blue-500/30 text-blue-400 shrink-0">
+              <Truck className="w-6 h-6 sm:w-8 sm:h-8" />
             </div>
             <div>
-              <div className="flex items-center gap-3">
-                <h2 className="text-2xl font-bold font-mono text-slate-100">{journey.vehicle_number}</h2>
+              <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <h2 className="text-xl sm:text-2xl font-bold font-mono text-slate-100">{journey.vehicle_number}</h2>
                 <StatusBadge status={journey.current_state} />
               </div>
-              <p className="text-xs text-slate-400 mt-1">
-                Journey #{journey.id} • Station: <span className="text-slate-200 font-semibold">{journey.site_name}</span> • ANPR Confidence: <span className="font-mono text-emerald-400 font-bold">{(journey.anpr_confidence * 100).toFixed(0)}%</span>
+              <p className="text-xs text-slate-400 mt-1 break-words">
+                Journey #{journey.id} • Station: <span className="text-slate-200 font-semibold">{journey.site_name}</span> • ANPR: <span className="font-mono text-emerald-400 font-bold">{(journey.anpr_confidence * 100).toFixed(0)}%</span>
               </p>
             </div>
           </div>
-          <button onClick={fetchJourneyDetail} className="btn-action btn-secondary-style btn-sm-size">
+          <button onClick={fetchJourneyDetail} className="btn-action btn-secondary-style btn-sm-size self-start sm:self-auto" title="Refresh">
             <RefreshCw className="w-4 h-4" />
           </button>
         </div>
@@ -155,12 +155,12 @@ export const JourneyDetailPage = () => {
                     Source: {v.source} • Timestamp: {new Date(v.timestamp).toLocaleTimeString()}
                   </div>
                   {v.details && (
-                    <div className="p-2.5 bg-slate-950 rounded font-mono text-[11px] text-slate-300">
+                    <div className="p-2.5 bg-slate-950 rounded font-mono text-[11px] text-slate-300 break-words">
                       {v.details}
                     </div>
                   )}
                   {v.error_message && (
-                    <div className="p-2.5 bg-rose-500/10 border border-rose-500/30 rounded text-[11px] text-rose-400">
+                    <div className="p-2.5 bg-rose-500/10 border border-rose-500/30 rounded text-[11px] text-rose-400 break-words">
                       Error: {v.error_message}
                     </div>
                   )}
@@ -177,7 +177,7 @@ export const JourneyDetailPage = () => {
                 <span>Journey Timestamps & Durations</span>
               </h3>
             </div>
-            <div className="grid grid-cols-2 gap-3 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div className="p-2.5 bg-slate-850 rounded border border-slate-800">
                 <span className="text-slate-400 block">Entry Time:</span>
                 <span className="font-semibold font-mono text-slate-200">{new Date(journey.entry_time).toLocaleString()}</span>

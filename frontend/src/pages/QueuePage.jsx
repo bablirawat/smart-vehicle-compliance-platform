@@ -33,15 +33,15 @@ export const QueuePage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <ListOrdered className="w-6 h-6 text-amber-400" />
-            <span>Live Site Queue - {selectedSite?.name}</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <ListOrdered className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 shrink-0" />
+            <span className="truncate">Live Site Queue - {selectedSite?.name}</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Real-time Queue Positions, Waiting Durations, and Priorities</p>
         </div>
-        <button onClick={fetchQueue} className="btn btn-secondary btn-sm">
+        <button onClick={fetchQueue} className="btn-action btn-secondary-style btn-sm-size self-start sm:self-auto" title="Refresh">
           <RefreshCw className="w-4 h-4" />
         </button>
       </div>

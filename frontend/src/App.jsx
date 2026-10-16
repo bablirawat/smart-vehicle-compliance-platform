@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { SiteProvider } from './context/SiteContext';
@@ -23,15 +23,20 @@ import { UserManagementPage } from './pages/UserManagementPage';
 
 const ProtectedLayout = () => {
   const { user } = useAuth();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   if (!user) return <Navigate to="/login" replace />;
 
   return (
     <SiteProvider>
       <WebSocketProvider>
         <div className="app-layout">
-          <Sidebar />
+          <Sidebar
+            isMobileOpen={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+          />
           <div className="content-wrapper">
-            <Navbar />
+            <Navbar onToggleMobileMenu={() => setMobileMenuOpen((prev) => !prev)} />
             <main className="main-content">
               <Routes>
                 <Route path="/station-dashboard" element={<StationDashboard />} />

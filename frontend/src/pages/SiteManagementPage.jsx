@@ -21,20 +21,20 @@ export const SiteManagementPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <Building2 className="w-6 h-6 text-cyan-400" />
-            <span>Multi-Site Directory & Configuration</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 shrink-0" />
+            <span className="truncate">Multi-Site Directory & Configuration</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Regional Logistics Terminals & Station Setup</p>
         </div>
-        <button onClick={fetchSites} className="btn btn-secondary btn-sm">
+        <button onClick={fetchSites} className="btn-action btn-secondary-style btn-sm-size self-start sm:self-auto" title="Refresh">
           <RefreshCw className="w-4 h-4" />
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {sites.map((s) => (
           <div key={s.id} className="card space-y-3">
             <div className="flex-between">

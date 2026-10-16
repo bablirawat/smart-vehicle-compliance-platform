@@ -125,21 +125,21 @@ export const SimulatorPage = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <Cpu className="w-6 h-6 text-indigo-400" />
-            <span>Operational Event Simulator</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Cpu className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 shrink-0" />
+            <span className="truncate">Operational Event Simulator</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Trigger Real Backend Lifecycle Events, Outages, Detections & Failures</p>
         </div>
-        <div className="text-xs font-mono text-cyan-400 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg">
+        <div className="text-xs font-mono text-cyan-400 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg self-start sm:self-auto">
           Active Station: {selectedSite?.name} (#{selectedSiteId})
         </div>
       </div>
 
       {/* Simulator Scenario Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Card 1: Normal Eligible Journey */}
         <div className="panel-card space-y-3">
           <div className="flex-between">
@@ -302,12 +302,12 @@ export const SimulatorPage = () => {
             <span className="badge-status badge-exited">Scenario 9</span>
           </div>
           <p className="text-xs text-slate-400">Switch active site context between North Terminal, East Coast Cargo, and South Freight.</p>
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-wrap items-center gap-1.5">
             {sites.map((s) => (
               <button
                 key={s.id}
                 onClick={() => handleSwitchSite(s.id)}
-                className={`btn-action btn-sm-size flex-1 text-[11px] justify-center ${selectedSiteId === s.id ? 'btn-primary-style' : 'btn-secondary-style'}`}
+                className={`btn-action btn-sm-size flex-1 min-w-[70px] text-[11px] justify-center ${selectedSiteId === s.id ? 'btn-primary-style' : 'btn-secondary-style'}`}
               >
                 {s.code}
               </button>
@@ -321,7 +321,7 @@ export const SimulatorPage = () => {
         <h3 className="panel-title text-sm font-mono text-cyan-400">
           <span>&gt; REAL-TIME BACKEND EVENT CONSOLE</span>
         </h3>
-        <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs space-y-1.5 max-h-60 overflow-y-auto">
+        <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs space-y-1.5 max-h-60 overflow-y-auto break-words">
           {logs.length === 0 ? (
             <div className="text-slate-600">Console ready. Click any simulation button above to trigger backend events...</div>
           ) : (

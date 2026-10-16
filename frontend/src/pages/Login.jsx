@@ -44,28 +44,28 @@ export const Login = () => {
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col lg:flex-row">
       {/* Left Hero Section (Split Screen) */}
-      <div className="lg:w-1/2 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-800 relative overflow-hidden">
+      <div className="lg:w-1/2 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 p-6 sm:p-8 lg:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-slate-800 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
 
         <div className="flex items-center gap-3 relative z-10">
-          <div className="bg-blue-600/20 p-2.5 rounded-xl border border-blue-500/30 text-blue-400">
-            <ShieldCheck className="w-8 h-8" />
+          <div className="bg-blue-600/20 p-2 sm:p-2.5 rounded-xl border border-blue-500/30 text-blue-400 shrink-0">
+            <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />
           </div>
           <div>
-            <h1 className="font-bold text-xl text-slate-100 tracking-wide">SMART VEHICLE PLATFORM</h1>
+            <h1 className="font-bold text-lg sm:text-xl text-slate-100 tracking-wide">SMART VEHICLE PLATFORM</h1>
             <p className="text-xs text-slate-400 font-mono">Enterprise Journey Management System</p>
           </div>
         </div>
 
-        <div className="my-12 space-y-6 relative z-10">
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-slate-100 leading-tight">
+        <div className="my-6 sm:my-8 lg:my-12 space-y-4 sm:space-y-6 relative z-10">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-100 leading-tight">
             Automated Terminal Compliance & Operational Control
           </h2>
-          <p className="text-slate-400 text-sm leading-relaxed max-w-lg">
+          <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-lg">
             Real-time ANPR vehicle recognition, automated external identity & compliance verification, state machine validation, queue optimization, and multi-site regional management.
           </p>
 
-          <div className="grid grid-cols-2 gap-4 pt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 sm:pt-4">
             <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800">
               <div className="flex items-center gap-2 text-emerald-400 text-xs font-bold font-mono">
                 <Radio className="w-3.5 h-3.5 live-pulse" />
@@ -83,13 +83,13 @@ export const Login = () => {
           </div>
         </div>
 
-        <div className="text-xs text-slate-500 font-mono relative z-10">
+        <div className="text-xs text-slate-500 font-mono relative z-10 hidden sm:block">
           System Build v1.0 • Enterprise Operations Ready
         </div>
       </div>
 
       {/* Right Login Form Section */}
-      <div className="lg:w-1/2 p-8 lg:p-16 flex items-center justify-center bg-slate-950">
+      <div className="lg:w-1/2 p-6 sm:p-8 lg:p-16 flex items-center justify-center bg-slate-950">
         <div className="w-full max-w-md space-y-8">
           <div>
             <h3 className="text-2xl font-bold text-slate-100">Sign In to Command Center</h3>

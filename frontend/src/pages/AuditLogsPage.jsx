@@ -45,27 +45,27 @@ export const AuditLogsPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <FileCheck2 className="w-6 h-6 text-indigo-400" />
-            <span>Immutable Audit Logs & Compliance Traceability</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <FileCheck2 className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 shrink-0" />
+            <span className="truncate">Immutable Audit Logs & Compliance Traceability</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Complete Historical Audit Trail of User Actions, Overrides, and State Changes</p>
         </div>
-        <div className="flex items-center gap-3">
-          <button onClick={handleExportCSV} className="btn btn-secondary btn-sm text-emerald-400 border-emerald-500/30">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          <button onClick={handleExportCSV} className="btn-action btn-secondary-style btn-sm-size text-emerald-400 border-emerald-500/30">
             <Download className="w-4 h-4" />
             <span>Export CSV</span>
           </button>
-          <button onClick={fetchAuditLogs} className="btn btn-secondary btn-sm">
+          <button onClick={fetchAuditLogs} className="btn-action btn-secondary-style btn-sm-size" title="Refresh">
             <RefreshCw className="w-4 h-4" />
           </button>
         </div>
       </div>
 
       {/* Filters Bar */}
-      <div className="card grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="card grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         <div>
           <label className="form-label">Filter by Vehicle Number</label>
           <input

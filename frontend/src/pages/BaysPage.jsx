@@ -51,67 +51,75 @@ export const BaysPage = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-            <Grid className="w-6 h-6 text-emerald-400" />
-            <span>Inspection Bay Management - {selectedSite?.name}</span>
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Grid className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 shrink-0" />
+            <span className="truncate">Inspection Bay Management - {selectedSite?.name}</span>
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Real-time Bay Allocation, Capability Matching, and Maintenance Controls</p>
         </div>
-        <button onClick={fetchBays} className="btn btn-secondary btn-sm">
+        <button onClick={fetchBays} className="btn-action btn-secondary-style btn-sm-size self-start sm:self-auto" title="Refresh">
           <RefreshCw className="w-4 h-4" />
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {bays.map((bay) => (
-          <div
-            key={bay.id}
-            className="p-5 bg-slate-900 border border-slate-800 rounded-xl space-y-4 shadow-lg hover:border-slate-700 transition-all"
-          >
-            <div className="flex-between">
-              <div>
-                <h3 className="font-bold text-slate-100 text-base">{bay.bay_name}</h3>
-                <p className="text-xs text-slate-400 font-mono">{bay.bay_type}</p>
-              </div>
-              <StatusBadge status={bay.status} />
-            </div>
-
-            <div className="p-3 bg-slate-800/60 rounded-lg border border-slate-700/60 text-xs">
-              <span className="text-slate-400 block">Current Occupant Vehicle:</span>
-              <span className="font-mono text-sm font-bold text-cyan-300">
-                {bay.current_vehicle_number || 'No Vehicle Assigned'}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-2 pt-2 border-t border-slate-800">
-              {bay.status !== 'AVAILABLE' && (
-                <button
-                  onClick={() => handleReleaseBay(bay.id)}
-                  className="btn btn-secondary btn-sm flex-1 text-xs justify-center"
-                >
-                  Force Release
-                </button>
-              )}
-              {bay.status === 'AVAILABLE' ? (
-                <button
-                  onClick={() => handleUpdateStatus(bay.id, 'MAINTENANCE')}
-                  className="btn btn-secondary btn-sm flex-1 text-xs text-amber-400 justify-center"
-                >
-                  Maintenance Mode
-                </button>
-              ) : bay.status === 'MAINTENANCE' ? (
-                <button
-                  onClick={() => handleUpdateStatus(bay.id, 'AVAILABLE')}
-                  className="btn btn-success btn-sm flex-1 text-xs justify-center"
-                >
-                  Mark Available
-                </button>
-              ) : null}
-            </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {bays.length === 0 ? (
+          <div className="col-span-full text-center py-12 text-slate-500 text-sm card">
+            No inspection bays configured for this station.
           </div>
-        ))}
+        ) : (
+          bays.map((bay) => (
+            <div
+              key={bay.id}
+              className="p-4 sm:p-5 bg-slate-900 border border-slate-800 rounded-xl space-y-4 shadow-lg hover:border-slate-700 transition-all flex flex-col justify-between"
+            >
+              <div className="space-y-3">
+                <div className="flex-between">
+                  <div>
+                    <h3 className="font-bold text-slate-100 text-base">{bay.bay_name}</h3>
+                    <p className="text-xs text-slate-400 font-mono">{bay.bay_type}</p>
+                  </div>
+                  <StatusBadge status={bay.status} />
+                </div>
+
+                <div className="p-3 bg-slate-800/60 rounded-lg border border-slate-700/60 text-xs">
+                  <span className="text-slate-400 block">Current Occupant Vehicle:</span>
+                  <span className="font-mono text-sm font-bold text-cyan-300 break-all">
+                    {bay.current_vehicle_number || 'No Vehicle Assigned'}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800">
+                {bay.status !== 'AVAILABLE' && (
+                  <button
+                    onClick={() => handleReleaseBay(bay.id)}
+                    className="btn-action btn-secondary-style btn-sm-size flex-1 min-w-[120px] text-xs justify-center"
+                  >
+                    Force Release
+                  </button>
+                )}
+                {bay.status === 'AVAILABLE' ? (
+                  <button
+                    onClick={() => handleUpdateStatus(bay.id, 'MAINTENANCE')}
+                    className="btn-action btn-secondary-style btn-sm-size flex-1 min-w-[120px] text-xs text-amber-400 justify-center"
+                  >
+                    Maintenance Mode
+                  </button>
+                ) : bay.status === 'MAINTENANCE' ? (
+                  <button
+                    onClick={() => handleUpdateStatus(bay.id, 'AVAILABLE')}
+                    className="btn-action btn-success-style btn-sm-size flex-1 min-w-[120px] text-xs justify-center"
+                  >
+                    Mark Available
+                  </button>
+                ) : null}
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

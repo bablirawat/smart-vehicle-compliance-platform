@@ -13,17 +13,17 @@ export const KPICard = ({ title, value, subtext, icon: Icon, color = 'blue' }) =
   const currentStyle = colorMap[color] || colorMap.blue;
 
   return (
-    <div className="kpi-card">
-      <div className="kpi-header">
-        <span>{title}</span>
+    <div className="kpi-card min-w-0">
+      <div className="kpi-header flex items-center justify-between gap-2">
+        <span className="truncate">{title}</span>
         {Icon && (
-          <div className={`p-2 rounded-lg border ${currentStyle}`}>
+          <div className={`p-1.5 sm:p-2 rounded-lg border shrink-0 ${currentStyle}`}>
             <Icon className="w-4 h-4" />
           </div>
         )}
       </div>
-      <div className="kpi-value">{value}</div>
-      {subtext && <div className="kpi-subtext">{subtext}</div>}
+      <div className="kpi-value truncate">{value}</div>
+      {subtext && <div className="kpi-subtext truncate">{subtext}</div>}
     </div>
   );
 };

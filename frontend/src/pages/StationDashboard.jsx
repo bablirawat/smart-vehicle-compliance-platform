@@ -205,9 +205,9 @@ export const StationDashboard = () => {
   return (
     <div className="space-y-6">
       {/* Top Action Header */}
-      <div className="flex-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-100 flex items-center gap-2 flex-wrap">
             <span>{selectedSite?.name || 'Station Operations Console'}</span>
             <span className="text-xs px-2.5 py-0.5 rounded bg-blue-500/20 text-blue-400 font-mono font-bold border border-blue-500/30">
               {selectedSite?.code}
@@ -215,7 +215,7 @@ export const StationDashboard = () => {
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">Real-time Terminal Operations & Inspection Lifecycle</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           <button
             onClick={() => navigate('/simulator')}
             className="btn-action btn-primary-style btn-sm-size bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg"
@@ -311,7 +311,7 @@ export const StationDashboard = () => {
                           <StatusBadge status={j.current_state} />
                         </td>
                         <td>
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-1.5 whitespace-nowrap">
                             <button
                               onClick={() => navigate(`/journeys/${j.id}`)}
                               className="btn-action btn-secondary-style btn-sm-size p-1.5"
