@@ -87,9 +87,16 @@ def populate_demo_data(db):
         {"email": "admin@system.com", "password_hash": hashed_pwd, "full_name": "Arthur System Admin", "role": UserRole.ADMIN, "site_id": None},
     ]
     for u_data in users_data:
-        if not db.query(User).filter_by(email=u_data["email"]).first():
+        existing_user = db.query(User).filter_by(email=u_data["email"]).first()
+        if not existing_user:
             user = User(**u_data)
             db.add(user)
+        else:
+            existing_user.password_hash = u_data["password_hash"]
+            existing_user.is_active = True
+            existing_user.role = u_data["role"]
+            existing_user.full_name = u_data["full_name"]
+            existing_user.site_id = u_data["site_id"]
     db.flush()
 
     # 5. Create Demo Vehicles & Completed Journeys for rich dashboard KPIs

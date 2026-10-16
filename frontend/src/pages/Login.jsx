@@ -14,21 +14,30 @@ export const Login = () => {
     e.preventDefault();
     setError(null);
     try {
-      await login(email, password);
+      await login(email.trim(), password);
       navigate('/station-dashboard');
     } catch (err) {
-      setError(err.response?.data?.detail || 'Invalid email or password');
+      if (!err.response) {
+        setError('Unable to reach backend server. Please check your network connection or verify the backend is running.');
+      } else {
+        setError(err.response?.data?.detail || 'Invalid email or password');
+      }
     }
   };
 
   const handleDemoLogin = async (demoEmail) => {
     setEmail(demoEmail);
     setPassword('password123');
+    setError(null);
     try {
-      await login(demoEmail, 'password123');
+      await login(demoEmail.trim(), 'password123');
       navigate('/station-dashboard');
     } catch (err) {
-      setError(err.response?.data?.detail || 'Login failed');
+      if (!err.response) {
+        setError('Unable to reach backend server. Please check your network connection or verify the backend is running.');
+      } else {
+        setError(err.response?.data?.detail || 'Login failed');
+      }
     }
   };
 

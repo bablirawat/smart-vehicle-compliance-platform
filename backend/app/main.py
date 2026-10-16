@@ -40,6 +40,7 @@ app = FastAPI(
 cors_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://smart-vehicle-compliance-platform.vercel.app",
 ]
 
 # Allow specifying frontend origins via FRONTEND_ORIGIN or CORS_ORIGINS
@@ -54,6 +55,7 @@ for env_name in ("FRONTEND_ORIGIN", "CORS_ORIGINS"):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -93,8 +95,8 @@ def startup_db_init():
             user_count = db.query(User).count()
             vehicle_count = db.query(Vehicle).count()
 
-            if site_count == 0 and user_count == 0 and vehicle_count == 0:
-                logger.info("Fresh database detected (0 sites, 0 users, 0 vehicles). Auto-seeding initial demo data...")
+            if site_count == 0 or user_count == 0:
+                logger.info(f"Database requires initial seeding ({site_count} sites, {user_count} users). Auto-seeding initial demo data...")
                 populate_demo_data(db)
                 logger.info("Demo data seeding completed successfully on startup.")
             else:

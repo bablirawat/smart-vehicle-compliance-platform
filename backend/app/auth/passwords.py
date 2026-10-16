@@ -1,5 +1,5 @@
 import hashlib
-import os
+import hmac
 
 def get_password_hash(password: str) -> str:
     # Use standard PBKDF2 HMAC SHA256 for fast, zero-warning password hashing
@@ -7,4 +7,6 @@ def get_password_hash(password: str) -> str:
     return hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt.encode('utf-8'), 100000).hex()
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    return get_password_hash(plain_password) == hashed_password
+    if not plain_password or not hashed_password:
+        return False
+    return hmac.compare_digest(get_password_hash(plain_password), hashed_password)
